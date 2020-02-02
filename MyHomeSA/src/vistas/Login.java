@@ -2,7 +2,6 @@
 package vistas;
 
 import controladores.CtrlMaster;
-import myhomesa.modelos.Usuario;
  
 public class Login extends javax.swing.JFrame {
     

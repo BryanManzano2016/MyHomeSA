@@ -19,8 +19,10 @@ public final class Cliente extends Usuario{
                 usuario.getTelefono(), usuario.getCorreoElectronico(), usuario.getDireccionDomicilio(),
                 usuario.getEstadoCivil(), usuario.getCargoTrabajo(), usuario.getUsuario(), 
                 usuario.getPassword());        
-        cargarDatosCliente();
         casas = new ArrayList<>();
+        
+        cargarDatosCliente();
+        buscarCasaUsuario();        
     }
 
     public String getIdCliente() {
@@ -106,24 +108,24 @@ public final class Cliente extends Usuario{
                 String nombreCasa = conexion.getResultado().getString("nombreCasa");
                 switch (nombreCasa) {
                     case "Oasis":
-                        casas.add(new CasaOasis(idCasa, metrosCuadrados, 
-                                nroPlantas, esEsquinera, orientacion, tamañoPatio, 
-                                numHabitacion, costoBase, idRelacion));
+                        casas.add(
+                                new CasaOasis(idCasa, metrosCuadrados, nroPlantas,
+                                        esEsquinera, orientacion, tamañoPatio,
+                                        numHabitacion, costoBase, idRelacion));
                         break;
                     case "Paraiso":
-                        casas.add(new CasaParaiso(idCasa, metrosCuadrados, 
-                                nroPlantas, esEsquinera, orientacion, tamañoPatio, 
-                                numHabitacion, costoBase, idRelacion));                        
+                        casas.add(new CasaParaiso(idCasa, metrosCuadrados, nroPlantas,
+                                        esEsquinera, orientacion, tamañoPatio,
+                                        numHabitacion, costoBase, idRelacion));                       
                         break;
                     case "Cielo":
-                        casas.add(new CasaCielo(idCasa, metrosCuadrados, 
-                                nroPlantas, esEsquinera, orientacion, tamañoPatio, 
-                                numHabitacion, costoBase, idRelacion));                 
+                        casas.add(new CasaCielo(idCasa, metrosCuadrados, nroPlantas,
+                                        esEsquinera, orientacion, tamañoPatio,
+                                        numHabitacion, costoBase, idRelacion));                
                         break;
                     default:
-                        throw new AssertionError();
+                        break;
                 } 
-                System.out.println(casas.size());
             } 
             conexion.anular_puentes();
         } catch( SQLException e ){

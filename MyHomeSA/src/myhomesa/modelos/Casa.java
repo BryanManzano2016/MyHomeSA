@@ -3,7 +3,7 @@ package myhomesa.modelos;
  
 import java.util.ArrayList;
 
-public abstract class Casa {
+public abstract class Casa{
     
     private String id;
     private float metrosCuadrados;

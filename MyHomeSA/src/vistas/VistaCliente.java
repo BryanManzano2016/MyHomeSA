@@ -1,11 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vistas;
 
 import controladores.CtrlCliente;
+import java.util.ArrayList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import myhomesa.modelos.Casa;
 
 public class VistaCliente extends javax.swing.JFrame {
     
@@ -14,9 +14,6 @@ public class VistaCliente extends javax.swing.JFrame {
     public VistaCliente() {
         this.setTitle("Cliente");
         initComponents();
-         
-        cargarDatosCliente();
-        
         setDefaultCloseOperation(VistasAdministrador.DISPOSE_ON_CLOSE); 
     }
     
@@ -27,15 +24,15 @@ public class VistaCliente extends javax.swing.JFrame {
         this.ctrlCliente = ctrlCliente;
     }    
     
-    public void cargarDatosCliente(){
-        try{
-            getCtrlCliente().getCliente();
-        }catch(Exception e){
-            System.out.println(e.getCause());
-            System.out.println(e.getLocalizedMessage());
-            System.out.println(e.getStackTrace());
-        }
-        
+    public void cargarDatos(){
+        ArrayList<Casa> casas = this.ctrlCliente.getCliente().getCasas();
+        for (int i = 0; i < casas.size() ; i++) {
+            tabla.setValueAt(casas.get(i).getIdRelacion(), i, 0); 
+            tabla.setValueAt(casas.get(i).getId(), i, 1); 
+        }      
+        tabla.getSelectionModel().addListSelectionListener((ListSelectionEvent event) -> {
+            tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
+        });           
         /*
         this.ctrlCliente.getCliente().cargarDatosCliente();
         this.ctrlCliente.getCliente().buscarCasaUsuario();
@@ -80,14 +77,63 @@ public class VistaCliente extends javax.swing.JFrame {
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "id", "metrosCuadados", "Nro. plantas", "Esquinera", "Orientacion", "Tamaño patio", "Nro. habitaciones", "Nro. baños", "Costo base"
+                "Identificador", "Casa ID"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {

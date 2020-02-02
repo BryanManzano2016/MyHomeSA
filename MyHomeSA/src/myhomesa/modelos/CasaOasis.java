@@ -20,7 +20,9 @@ public class CasaOasis extends Casa{
                 numeroHabitaciones, costoBase, idRelacion);
         this.nombreCasa = "Cielo";
     }
-     
-    
+
+    public String getNombreCasa() {
+        return nombreCasa;
+    }
     
 }

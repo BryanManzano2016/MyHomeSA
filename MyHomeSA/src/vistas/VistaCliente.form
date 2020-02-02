@@ -123,16 +123,9 @@
             <Component class="javax.swing.JTable" name="tabla">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="9" rowCount="0">
-                    <Column editable="true" title="id" type="java.lang.String"/>
-                    <Column editable="true" title="metrosCuadados" type="java.lang.Float"/>
-                    <Column editable="true" title="Nro. plantas" type="java.lang.Integer"/>
-                    <Column editable="true" title="Esquinera" type="java.lang.Integer"/>
-                    <Column editable="true" title="Orientacion" type="java.lang.String"/>
-                    <Column editable="true" title="Tama&#xf1;o patio" type="java.lang.Float"/>
-                    <Column editable="true" title="Nro. habitaciones" type="java.lang.Integer"/>
-                    <Column editable="true" title="Nro. ba&#xf1;os" type="java.lang.Integer"/>
-                    <Column editable="true" title="Costo base" type="java.lang.Float"/>
+                  <Table columnCount="2" rowCount="50">
+                    <Column editable="true" title="Identificador" type="java.lang.Integer"/>
+                    <Column editable="true" title="Casa ID" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value=""/>

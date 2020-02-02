@@ -9,7 +9,7 @@ package myhomesa.modelos;
  *
  * @author Dark
  */
-public class CasaParaiso extends Casa {
+public class CasaParaiso extends Casa{
 
     protected final String nombreCasa;
 
@@ -20,5 +20,7 @@ public class CasaParaiso extends Casa {
                 numeroHabitaciones, costoBase, idRelacion);
         this.nombreCasa = "Cielo";
     }
-    
+    public String getNombreCasa() {
+        return nombreCasa;
+    }
 }
