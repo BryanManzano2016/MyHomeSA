@@ -111,17 +111,17 @@ public final class Cliente extends Usuario{
                         casas.add(
                                 new CasaOasis(idCasa, metrosCuadrados, nroPlantas,
                                         esEsquinera, orientacion, tamañoPatio,
-                                        numHabitacion, costoBase, idRelacion));
+                                        numHabitacion, costoBase, idRelacion,nombreCasa));
                         break;
                     case "Paraiso":
                         casas.add(new CasaParaiso(idCasa, metrosCuadrados, nroPlantas,
                                         esEsquinera, orientacion, tamañoPatio,
-                                        numHabitacion, costoBase, idRelacion));                       
+                                        numHabitacion, costoBase, idRelacion, nombreCasa));                       
                         break;
                     case "Cielo":
                         casas.add(new CasaCielo(idCasa, metrosCuadrados, nroPlantas,
                                         esEsquinera, orientacion, tamañoPatio,
-                                        numHabitacion, costoBase, idRelacion));                
+                                        numHabitacion, costoBase, idRelacion, nombreCasa));                
                         break;
                     default:
                         break;
@@ -132,6 +132,32 @@ public final class Cliente extends Usuario{
             System.out.println( e.getSQLState() );
         } 
     }       
+    
+    public void cargarElementosCasa(int idRelacion){
+        try{ 
+            conexion.iniciar_conexion();
+            conexion.setProcedimiento( conexion.getConexion().
+                            prepareCall( "call buscarCasaElementos(?)")
+            );
+            // ec.idElemento, ec.precio, ec.nombre
+            conexion.getProcedimiento().setInt(1, idRelacion );
+            conexion.setResultado( conexion.getProcedimiento().executeQuery() );
+            while ( conexion.getResultado().next() ) {
+                for (Casa casa : casas) {
+                    casa.agregarElementoCasa(
+                        new ElementoCasa(conexion.getResultado().getString("idElemento"),                                
+                        conexion.getResultado().getString("nombre"),
+                        conexion.getResultado().getFloat("precio"))
+                    );
+                }
+                
+            } 
+            conexion.anular_puentes();
+        } catch( SQLException e ){
+            System.out.println( e.getSQLState() );
+            System.out.println(e.getCause());
+        }         
+    }    
     
     @Override
     public String toString() {

@@ -3,13 +3,15 @@ package vistas;
 
 import controladores.CtrlCliente;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import myhomesa.modelos.Casa;
 
 public class VistaCliente extends javax.swing.JFrame {
     
     CtrlCliente ctrlCliente;
+    String idCasa = "";
+    int idRelacion = -1;
     
     public VistaCliente() {
         this.setTitle("Cliente");
@@ -29,10 +31,14 @@ public class VistaCliente extends javax.swing.JFrame {
         for (int i = 0; i < casas.size() ; i++) {
             tabla.setValueAt(casas.get(i).getIdRelacion(), i, 0); 
             tabla.setValueAt(casas.get(i).getId(), i, 1); 
+            tabla.setValueAt(casas.get(i).getNombreCasa(), i, 2);
         }      
         tabla.getSelectionModel().addListSelectionListener((ListSelectionEvent event) -> {
-            tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
+            this.idRelacion = Integer.parseInt(
+                    tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
+            this.idCasa = tabla.getValueAt(tabla.getSelectedRow(), 1).toString();          
         });           
+
         /*
         this.ctrlCliente.getCliente().cargarDatosCliente();
         this.ctrlCliente.getCliente().buscarCasaUsuario();
@@ -53,7 +59,7 @@ public class VistaCliente extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        btnInformacion = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -77,63 +83,63 @@ public class VistaCliente extends javax.swing.JFrame {
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Identificador", "Casa ID"
+                "Identificador", "Casa ID", "Nombre"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -143,10 +149,10 @@ public class VistaCliente extends javax.swing.JFrame {
         tabla.setToolTipText("");
         jScrollPane1.setViewportView(tabla);
 
-        jButton2.setText("Informacion detallada");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnInformacion.setText("Informacion detallada");
+        btnInformacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnInformacionActionPerformed(evt);
             }
         });
 
@@ -170,7 +176,7 @@ public class VistaCliente extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -189,7 +195,7 @@ public class VistaCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnInformacion))
                 .addGap(22, 22, 22))
         );
 
@@ -213,9 +219,18 @@ public class VistaCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnInformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformacionActionPerformed
+        this.ctrlCliente.getCliente().cargarElementosCasa(this.idRelacion);
+        this.ctrlCliente.getCliente().getCasas().stream().filter((casa) -> 
+                (casa.getId().equals(this.idCasa) && 
+                        casa.getIdRelacion() == this.idRelacion)).forEachOrdered((casa) -> {
+                    JOptionPane.showMessageDialog(this,
+                            casa.toString() + "\n" + casa.getElementosExtra().toString(),
+                            "Warning",
+                            JOptionPane.WARNING_MESSAGE);
+        });
+    
+    }//GEN-LAST:event_btnInformacionActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -269,9 +284,9 @@ public class VistaCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInformacion;
     private javax.swing.JButton btnSesion;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
