@@ -6,21 +6,23 @@ import java.sql.SQLException;
 
 public class Usuario {
     
-    private String nombres;
-    private String apellidos;
-    private String cedula;
-    private String telefono;
-    private String correoElectronico;
-    private String direccionDomicilio;
-    private String estadoCivil;
-    private String cargoTrabajo;
+    protected String nombres;
+    protected String apellidos;
+    protected String cedula;
+    protected String telefono;
+    protected String correoElectronico;
+    protected String direccionDomicilio;
+    protected String estadoCivil;
+    protected String cargoTrabajo;
     
-    private String usuario;
-    private String password;
+    protected String usuario;
+    protected String password;
     
-    private final Conexion conexion;
+    protected final Conexion conexion;
 
-    public Usuario(String nombres, String apellidos, String cedula, String telefono, String correoElectronico, String direccionDomicilio, String estadoCivil, String cargoTrabajo, String usuario, String password) {
+    public Usuario(String nombres, String apellidos, String cedula, String telefono,
+            String correoElectronico, String direccionDomicilio, String estadoCivil,
+            String cargoTrabajo, String usuario, String password) {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.cedula = cedula;
@@ -149,8 +151,7 @@ public class Usuario {
             } 
             conexion.anular_puentes();
         } catch( SQLException e ){
-            System.out.println( e.getMessage() );
-            System.out.println( e.getLocalizedMessage() );
+            System.out.println( e.getSQLState() );
         } 
         return null;
     }  

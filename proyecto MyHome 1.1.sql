@@ -23,44 +23,42 @@ create table login(
 create table Cliente(
 	idCliente varchar(10) primary key,
 	telefono int not null,
-	numHijos int not null
+	numHijos int not null,
+    cedula int not null,
+    foreign key (cedula) references Usuario (cedula)
 );
-
-create table tipoCasa(
-	idTipoCasa varchar(20) primary key,
-	numHabitacion int not null,
-	nombreCasa varchar(30) not null
-);
-
+ 
 create table casa(
 	idCasa varchar(20) primary key,
 	metrosCuadrados float not null,
 	nroPlantas int not null,
-	esEsquinera boolean not null,
-	precio float not null,
+	esEsquinera boolean not null, 
 	orientacion varchar(40) not null,
 	tamañoPatio float not null,
-	costoBase float not null,
-	idTipoCasa varchar(20),
-	idCliente varchar (10),
-	foreign key (idTipoCasa) references tipoCasa (idTipoCasa),
-	foreign key (idCliente) references Cliente (idCliente)
+	costoBase float not null, 
+    numHabitacion int not null,
+    nombreCasa varchar(50) not null
 );
 
 create table elementosCasa(
 	idElemento varchar(20) primary key,
 	precio float not null,
-	nombre varchar(30) not null,
-	idCasa varchar(20),
-	foreign key (idCasa) references casa (idCasa)
+	nombre varchar(30) not null
 );
+ 
+create table casaRelacionUsuario(
+	idRelacion int AUTO_INCREMENT PRIMARY KEY,	
+	idCasa varchar(20),
+    cedula int
+); 
 
-
-
-
-
-
-
+create table casaRelacionElemento(
+	idRelacion int AUTO_INCREMENT PRIMARY KEY,
+    idElemento varchar(20),
+    idCasaRelacionUsuario int,
+    foreign key (idCasaRelacionUsuario) references casaRelacionUsuario (idRelacion)
+);
+ 
 -- procedures para crear nuevo elementos...
 delimiter $$
 create procedure crearUsuario(
@@ -82,47 +80,35 @@ begin
 end $$
 
 create procedure crearCliente(
-	in spidCliente varchar(50), in sptelefono int, in spnumHijos int
+	in spidCliente varchar(50), in sptelefono int, in spnumHijos int,
+    in spucedula varchar(50)
 )
 begin
-	insert into cliente (idCliente,telefono,numHijos)
-	values (spidCliente,sptelefono,spnumHijos);
+	insert into cliente (idCliente,telefono,numHijos, cedula)
+	values (spidCliente,sptelefono,spnumHijos, spucedula);
 end $$
+
 
 create procedure crearCasa(
 	in spidCasa varchar(20), in spmetrosCuadrados float, in spnroPlantas int,
-	in spesEsquinera boolean, in spprecio float, in sporientacion varchar(40),
-	in sptamañoPatio float, in spcostoBase float , spidTipoCasa varchar(20),
-	spidCliente varchar(10)
+	in spesEsquinera boolean, in sporientacion varchar(40),
+	in sptamañoPatio float, in spcostoBase float, in spuNumHabitacion int,
+	in spuNombreCasa varchar(50)
 )
 begin
-	insert into Casa(idCasa,metrosCuadrados, nroPlantas,esEsquinera,precio,orientacion,tamañoPatio,costoBase,idTipoCasa,idCliente)
-	values (spidCasa,spmetrosCuadrados,spnroPlantas,spesEsquinera,spprecio,sporientacion,
-	sptamañoPatio,spcostoBase,spidTipoCasa,spidCliente);
-end $$
-
-
-
-
-create procedure crearTipoCasa(
-	in spidTipoCasa varchar(20), in spnumHabitacion int, in spnombreCasa varchar(30)
-)
-begin
-	insert into tipoCasa (idTipoCasa,numHabitacion,nombreCasa)
-	values (spidTipoCasa,spnumHabitacion,spnombreCasa);
+	insert into Casa(idCasa,metrosCuadrados, nroPlantas,esEsquinera,orientacion,tamañoPatio,
+		costoBase ,numHabitacion, nombreCasa)
+	values (spidCasa,spmetrosCuadrados,spnroPlantas,spesEsquinera,sporientacion,
+	sptamañoPatio,spcostoBase,spuNumHabitacion,spuNombreCasa);
 end $$
 
 create procedure crearElementosCasa(
-	in spidElemento varchar(20), in spprecio float, in spnombre varchar(30), 
-	spidCasa varchar(20)
+	in spidElemento varchar(20), in spprecio float, in spnombre varchar(30) 
 )
 begin
-	insert into elementosCasa (idelemento,precio,nombre,idcasa)
-	values (spidElemento,spprecio,spnombre,spidCasa);
+	insert into elementosCasa (idelemento,precio,nombre)
+	values (spidElemento,spprecio,spnombre);
 end $$
-
-
-
 
 -- procedures para eliminar
 create procedure eliminarUsuario( in spcedula int)
@@ -145,11 +131,6 @@ begin
 	delete FROM casa where idcasa = spidcasa;
 end $$
 
-create procedure eliminartipocasa( in spidtipocasa varchar(20))
-begin 
-	delete FROM tipocasa where idtipocasa = spidtipocasa;
-end $$
-
 create procedure eliminarelementoscasa( in spidelemento varchar(20))
 begin 
 	delete FROM elementoscasa where idelementocasa = spidelemento;
@@ -163,10 +144,9 @@ begin
 end $$
 
 create procedure buscarlogin( in spusuario varchar(50), in spuContrasena varchar(50) )
-begin 
-    # SET @cedulaVar = "";
+begin  
 	DECLARE cedulaVar varchar(50) DEFAULT "";
-    
+     
     select lg.cedula 
     into cedulaVar
     from login lg
@@ -175,19 +155,14 @@ begin
 	select * from usuario us where us.cedula = cedulaVar;
 end $$
 
-create procedure buscarCliente( in spidcliente varchar(10))
+create procedure buscarCliente( in cedula int )
 begin 
-	select * from  cliente where idcliente = spidcliente;
+	select * from  cliente cl where cl.cedula = cedula;
 end $$
 
 create procedure buscarCasa( in spidcasa varchar(20))
 begin 
 	select * from casa where idcasa = spidcasa;
-end $$
-
-create procedure buscartipocasa( in spidtipocasa varchar(20))
-begin 
-	select * from tipocasa where idtipocasa = spidtipocasa;
 end $$
 
 create procedure buscarelementoscasa( in spidelemento varchar(20))
@@ -225,15 +200,7 @@ begin
 	set telefono = sptelefono, numHijos=spnumHijos
 	where idcliente=spidcliente;
 end $$
-
-create procedure actualizarTipoCasa(in spidtipocasa varchar(20),in spnumhabitacion int, spnombrecasa varchar(30) 
-)
-begin 
-update tipocasa
-	set numhabitacion = spnumhabitacion, nombrecasa=spnombrecasa
-	where idtipocasa=spidtipocasa;
-end $$
-
+ 
 create procedure actualizarelementoscasa(in spidelemento varchar(20),in spprecio float, spnombre varchar(30) 
 )
 begin 
@@ -244,28 +211,40 @@ end $$
 
 create procedure actualizarCasa(in spidcasa varchar(20),in spmetros float,
 	in spnroPlantas int,
-	in spesesquinera boolean,in spprecio float,in sporientacion varchar(40),
+	in spesesquinera boolean ,in sporientacion varchar(40),
 	in sptamañopatio float,
-	in spcostobase float)
+	in spcostobase float,
+    in spunumHabitacion int,
+    in spunombreCasa varchar(50))
 begin 
 	update casa
 	set metrosCuadrados= spmetros, nroPlantas=spnroPlantas,esEsquinera = spesesquinera,
-	precio=spprecio, orientacion= sporientacion,tamañoPatio= sptamañoPatio
-	, costoBase= spcostobase
-	 where idcasa=spidcasa;
+    orientacion= sporientacion,tamañoPatio= sptamañoPatio, costoBase= spcostobase,
+    numHabitacion = spunumHabitacion, nombreCasa = spunombreCasa
+	where idcasa=spidcasa;
 end $$
 delimiter $$;
+    
+create procedure buscarCasaUsuario( in cedula int)
+begin 
+	select *
+    from casa cs, casaRelacionUsuario cru
+    where cs.idCasa = cru.idCasa and cru.cedula = cedula;    
+end $$;
 
-
- 
--- insertando datos
--- usuario 
-
+create procedure buscarCasaElementos( in idRelacion int)
+begin 
+	select ec.idElemento, ec.precio, ec.nombre
+    from casarelacionelemento cre, casarelacionusuario cru, elementoscasa ec
+    where cre.idCasaRelacionUsuario = cru.idRelacion and cre.idElemento = ec.idElemento
+    and cru.idRelacion = idRelacion;   
+end $$;
+  
 call crearUsuario(929786366,'Christian','Portilla',0929785214,'poplays26@gmail.com','Via samborondon cdla las riberas','soltero','vendedor');
 call crearUsuario(1701514785,'Genesis','Riera',0991224574,'genesisrie_24@gmail.com','la alborada etapa 11va','soltero','cliente');
 call crearUsuario(914447852,'Bryan','Manzano',0981234561,'bmanzano@hotmail.com','los ceibos frente a olivos tower','soltero','administrador');
-call crearUsuario(920142356,'William','Briones',0914523654,'wilfrio@gmail.com','la troncal calle principal mz y1 villa 3','soltero','vendedor');
-call crearUsuario(954552102,'Alexia','Texas',0914231520,'alexiatex@gmail.com','isla mocoli cdla el paraiso','soltero','vendedor');
+call crearUsuario(920142356,'William','Briones',0914523654,'wilfrio@gmail.com','la troncal calle principal mz y1 villa 3','soltero','cliente');
+call crearUsuario(954552102,'Alexia','Texas',0914231520,'alexiatex@gmail.com','isla mocoli cdla el paraiso','soltero','cliente');
 
 -- login 
 call crearLogin('cp','cp',929786366);
@@ -274,36 +253,45 @@ call crearLogin('bm','bm',914447852);
 call crearLogin('Wilfrio','Ginpa152',920142356);
 call crearLogin('AleTex','Alexizz123',954552102);
 
--- tipo casa
-call crearTipoCasa('CAS001','2','Oasis');
-call crearTipoCasa('CAS002','3','Paraiso');
-call crearTipoCasa('CAS003','4','Cielo');
-
-
-
 
 -- cliente
-call crearcliente('CUS001',929785214,2);
-call crearcliente('CUS002',991224574,1);
-call crearcliente('CUS003',981234561,0);
-
-
+call crearcliente('CUS001',929785214,2, 920142356);
+call crearcliente('CUS002',991224574,1, 954552102);
+call crearcliente('CUS003',981234561,0, 1701514785);
+ 
 
 -- casa
-call crearCasa('CASNT001','250',2,true,100000,'centro',25,25000,'CAS002','CUS001');
-call crearCasa('CASNT002','500',6,false,550000,'norte',50,150000,'CAS003','CUS002');
-call crearCasa('CASNT003','100',1,false,57000,'sur',8,10000,'CAS001','CUS003');
-
+call crearCasa('CASNT001','250',2,true,'centro',25,25000,4,'Oasis');
+call crearCasa('CASNT002','500',6,false,'norte',50,150000,3,'Paraiso');
+call crearCasa('CASNT003','100',1,false,'sur',8,10000,2,'Cielo');
+ 
 -- elementosCasa
-call crearelementoscasa('ELE001',350,'Cuadro','CASNT001');
-call crearelementoscasa('ELE002',1500,'Mesa Billar','CASNT002');
-call crearelementoscasa('ELE003',700,'Cama','CASNT003');
-call crearelementoscasa('ELE004',3000,'Maquina de pesas','CASNT002');
-call crearelementoscasa('ELE005',854.55,'Equipo de sonido','CASNT003');
+call crearelementoscasa('ELE001',350,'Cuadro');
+call crearelementoscasa('ELE002',1500,'Mesa Billar');
+call crearelementoscasa('ELE003',700,'Cama');
+call crearelementoscasa('ELE004',3000,'Maquina de pesas');
+call crearelementoscasa('ELE005',854.55,'Equipo de sonido');  
+   
+insert into casaRelacionUsuario values
+	(default, 'CASNT001', 1701514785),
+    (default, 'CASNT002', 954552102),
+    (default, 'CASNT003', 1701514785),
+    (default, 'CASNT002', 1701514785),
+    (default, 'CASNT001', 954552102),
+    (default, 'CASNT002', 920142356);
 
-
-
-
+insert into casaRelacionElemento values
+	(default , 'ELE001', 1),
+    (default , 'ELE002', 2),
+    (default , 'ELE003', 1),
+    (default , 'ELE004', 4),
+    (default , 'ELE005', 5),
+    (default , 'ELE001', 5),
+    (default , 'ELE002', 4),
+    (default , 'ELE003', 3),
+    (default , 'ELE004', 2),
+    (default , 'ELE005', 1),
+    (default , 'ELE001', 3);
 
 
 

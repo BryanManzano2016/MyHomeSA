@@ -4,7 +4,6 @@ package controladores;
 import myhomesa.modelos.Usuario;
 import vistas.VistasAdministrador;
 import vistas.VistaCliente;
-import vistas.VistaNuevoCliente;
 import vistas.VistaVendedor;
 
  
@@ -58,14 +57,16 @@ public class CtrlMaster {
         this.ctrlCliente = new CtrlCliente(usuario);        
         VistaCliente vistaCliente = new VistaCliente();           
         vistaCliente.setCtrlCliente(this.ctrlCliente);
-
+        
         vistaCliente.setVisible(true);
     }
+    /*
     public void llamarClienteInvitado(){
         this.ctrlNuevoCliente = new CtrlNuevoCliente(new Usuario());        
         VistaNuevoCliente vistaNuevoCliente = new VistaNuevoCliente();           
         vistaNuevoCliente.setCtrlVendedor(this.ctrlCliente);
 
         vistaNuevoCliente.setVisible(true);
-    }    
+    } 
+    */   
 }

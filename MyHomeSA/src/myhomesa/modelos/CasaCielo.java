@@ -11,4 +11,14 @@ package myhomesa.modelos;
  */
 public class CasaCielo extends Casa{
     
+    protected final String nombreCasa;
+
+    public CasaCielo(String id, float metrosCuadrados, int nroPlantas, int esEsquinera,
+            String orientacion, float tamanoPatio, int numeroHabitaciones, 
+            float costoBase, int idRelacion) {
+        super(id, metrosCuadrados, nroPlantas, esEsquinera, orientacion, tamanoPatio,
+                numeroHabitaciones, costoBase, idRelacion);
+        this.nombreCasa = "Cielo";
+    }
+    
 }

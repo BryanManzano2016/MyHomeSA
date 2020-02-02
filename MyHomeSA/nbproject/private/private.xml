@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Dark/Desktop/proyecto(1)/MyHomeSA/src/vistas/Login.java</file>
-            <file>file:/C:/Users/Dark/Desktop/proyecto(1)/MyHomeSA/src/vistas/VistasAdministrador.java</file>
-            <file>file:/C:/Users/Dark/Desktop/proyecto(1)/MyHomeSA/src/myhomesa/modelos/Usuario.java</file>
-            <file>file:/C:/Users/Dark/Desktop/proyecto(1)/MyHomeSA/src/myhomesa/modelos/Administrador.java</file>
-            <file>file:/C:/Users/Dark/Desktop/proyecto(1)/MyHomeSA/src/Auxiliar/Conexion.java</file>
-            <file>file:/C:/Users/Dark/Desktop/proyecto(1)/MyHomeSA/src/controladores/CtrlMaster.java</file>
+            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/MyHomeSA/MyHomeSA/src/controladores/CtrlCliente.java</file>
+            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/MyHomeSA/MyHomeSA/src/myhomesa/modelos/Usuario.java</file>
+            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/MyHomeSA/MyHomeSA/src/controladores/CtrlMaster.java</file>
+            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/MyHomeSA/MyHomeSA/src/vistas/VistaCliente.java</file>
+            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/MyHomeSA/MyHomeSA/src/myhomesa/modelos/Cliente.java</file>
         </group>
     </open-files>
 </project-private>

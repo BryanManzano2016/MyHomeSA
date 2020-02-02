@@ -6,8 +6,6 @@
 package vistas;
 
 import controladores.CtrlCliente;
-import java.util.Date;
-import myhomesa.modelos.Cliente;
 
 /**
  *
@@ -204,7 +202,6 @@ public class VistaNuevoCliente extends javax.swing.JFrame {
         String direccion = jTextField7.getText();
         String correo = jTextField5.getText();
         String cedula = jTextField8.getText();
-        Cliente cliente = new Cliente(nombre, apellido, telefono, direccion, correo, cedula);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
