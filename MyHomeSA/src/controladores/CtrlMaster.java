@@ -19,29 +19,31 @@ public class CtrlMaster {
     public CtrlMaster(){
     }
     
-    public void validarCredenciales(String opcion){
-        Usuario usuario = new Usuario();
-        usuario.validarCredenciales();
-        // 1 por defecto 
-        switch (opcion) {
-            case "1":
-                llamarCtrlCliente(usuario);                
-                break;
-            case "2":
-                llamarCtrlVendedor(usuario);
-                break;
-            case "3":
-                llamarCtrlAdministrador(usuario);
-                break;       
-            default:
-                break;
+    public void validarCredenciales(String usuarioM, String contrasenaM){
+        
+        Usuario usuario = new Usuario().validarCredenciales(usuarioM, contrasenaM);
+        
+        if (usuario != null) {
+            System.out.println(usuario.toString());
+            switch (usuario.getCargoTrabajo()) {
+                case "cliente":
+                    llamarCtrlCliente(usuario);                
+                    break;
+                case "vendedor":
+                    llamarCtrlVendedor(usuario);
+                    break;
+                case "administrador":
+                    llamarCtrlAdministrador(usuario);
+                    break;       
+                default:
+                    break;
+            }            
         }
     } 
     public void llamarCtrlAdministrador(Usuario usuario){
         this.ctrlAdministrador = new CtrlAdministrador(usuario);        
         VistasAdministrador vistaAdministrador = new VistasAdministrador();        
-        vistaAdministrador.setCtrlVendedor(ctrlAdministrador);
-        
+        vistaAdministrador.setCtrlAdministrador(ctrlAdministrador);
         vistaAdministrador.setVisible(true);
     }    
     
@@ -55,7 +57,7 @@ public class CtrlMaster {
     public void llamarCtrlCliente(Usuario usuario){
         this.ctrlCliente = new CtrlCliente(usuario);        
         VistaCliente vistaCliente = new VistaCliente();           
-        vistaCliente.setCtrlVendedor(this.ctrlCliente);
+        vistaCliente.setCtrlCliente(this.ctrlCliente);
 
         vistaCliente.setVisible(true);
     }

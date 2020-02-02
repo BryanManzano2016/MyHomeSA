@@ -6,34 +6,33 @@
 package vistas;
 
 import controladores.CtrlCliente;
-import controladores.CtrlMaster;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import myhomesa.modelos.Casa;
-import myhomesa.modelos.Cliente;
 import myhomesa.modelos.ElementoCasa;
-import myhomesa.modelos.Usuario;
 
 public class VistaCliente extends javax.swing.JFrame {
     
-    private Cliente cliente;
-    CtrlCliente ctrlCliente;
+    private CtrlCliente ctrlCliente;
+    
     ArrayList<Casa> casas;
     ArrayList<ElementoCasa> elementos;
-    CtrlMaster ctrlMaster;
     
     public VistaCliente() {
         this.setTitle("Cliente");
         initComponents();
-        Usuario usuario = null;
-         this.ctrlCliente = new CtrlCliente(usuario);
+        
         this.elementos = new ArrayList<>();
         this.casas = new ArrayList<>();
+        
+        setDefaultCloseOperation(VistasAdministrador.DISPOSE_ON_CLOSE); 
     }
-    
-    public void setCtrlVendedor(CtrlCliente ctrl){
-        this.ctrlCliente = ctrl;
-    }     
+    public CtrlCliente getCtrlCliente() {
+        return ctrlCliente;
+    }
+    public void setCtrlCliente(CtrlCliente ctrlCliente) {
+        this.ctrlCliente = ctrlCliente;
+    }
  
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,6 +51,7 @@ public class VistaCliente extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        btnSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,28 +83,42 @@ public class VistaCliente extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(jTable2);
 
+        btnSesion.setText("Cerrar Cesion");
+        btnSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSesionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(69, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(74, 74, 74))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(74, 74, 74))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnSesion)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addContainerGap()
+                .addComponent(btnSesion)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -153,6 +167,7 @@ public class VistaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAccionesActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        /*
         String cedula = jTextField9.getText();
         LinkedList<String> datos = cliente.consultarCliente(cedula);
         if (datos.size() != 0) {
@@ -172,11 +187,20 @@ public class VistaCliente extends javax.swing.JFrame {
                 }
             ));
         }
+        */
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         jTextField9.setText("");
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void btnSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSesionActionPerformed
+        this.setVisible(false);
+        this.dispose(); 
+        
+        Login login = new Login();
+        login.setVisible(true);
+    }//GEN-LAST:event_btnSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,6 +240,7 @@ public class VistaCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcciones;
+    private javax.swing.JButton btnSesion;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel10;

@@ -10,4 +10,12 @@ public class CtrlAdministrador {
     public CtrlAdministrador(Usuario usuario) {
         this.administrador = new Administrador(usuario);
     }
+    public Administrador getAdministrador() {
+        return administrador;
+    }
+    public void setAdministrador(Administrador administrador) {
+        this.administrador = administrador;
+    }
+    
+    
 }

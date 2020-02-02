@@ -13,16 +13,12 @@ create table Usuario(
 	rol varchar(20) not null
 );
 
-
-
 create table login(
 	usuario varchar(50) primary key,
 	contraseña varchar(50) not null,
 	cedula int not null,
 	foreign key (cedula) references Usuario (cedula)
 );
-
-
 
 create table Cliente(
 	idCliente varchar(10) primary key,
@@ -50,6 +46,7 @@ create table casa(
 	foreign key (idTipoCasa) references tipoCasa (idTipoCasa),
 	foreign key (idCliente) references Cliente (idCliente)
 );
+
 create table elementosCasa(
 	idElemento varchar(20) primary key,
 	precio float not null,
@@ -57,6 +54,12 @@ create table elementosCasa(
 	idCasa varchar(20),
 	foreign key (idCasa) references casa (idCasa)
 );
+
+
+
+
+
+
 
 -- procedures para crear nuevo elementos...
 delimiter $$
@@ -159,9 +162,17 @@ begin
 	select * from usuario where cedula=  spcedula;
 end $$
 
-create procedure buscarlogin( in spusuario varchar(50))
+create procedure buscarlogin( in spusuario varchar(50), in spuContrasena varchar(50) )
 begin 
-	select * from login where usuario = spusuario;
+    # SET @cedulaVar = "";
+	DECLARE cedulaVar varchar(50) DEFAULT "";
+    
+    select lg.cedula 
+    into cedulaVar
+    from login lg
+    where lg.usuario = spusuario and  lg.contraseña = spuContrasena;
+    
+	select * from usuario us where us.cedula = cedulaVar;
 end $$
 
 create procedure buscarCliente( in spidcliente varchar(10))
@@ -250,18 +261,18 @@ delimiter $$;
 -- insertando datos
 -- usuario 
 
-call crearUsuario(0929786366,'Christian','Portilla',0929785214,'poplays26@gmail.com','Via samborondon cdla las riberas','soltero','cliente');
+call crearUsuario(929786366,'Christian','Portilla',0929785214,'poplays26@gmail.com','Via samborondon cdla las riberas','soltero','vendedor');
 call crearUsuario(1701514785,'Genesis','Riera',0991224574,'genesisrie_24@gmail.com','la alborada etapa 11va','soltero','cliente');
-call crearUsuario(0914447852,'Bryan','Manzano',0981234561,'bmanzano@hotmail.com','los ceibos frente a olivos tower','soltero','cliente');
-call crearUsuario(0920142356,'William','Briones',0914523654,'wilfrio@gmail.com','la troncal calle principal mz y1 villa 3','soltero','vendedor');
-call crearUsuario(0954552102,'Alexia','Texas',0914231520,'alexiatex@gmail.com','isla mocoli cdla el paraiso','soltero','vendedor');
+call crearUsuario(914447852,'Bryan','Manzano',0981234561,'bmanzano@hotmail.com','los ceibos frente a olivos tower','soltero','administrador');
+call crearUsuario(920142356,'William','Briones',0914523654,'wilfrio@gmail.com','la troncal calle principal mz y1 villa 3','soltero','vendedor');
+call crearUsuario(954552102,'Alexia','Texas',0914231520,'alexiatex@gmail.com','isla mocoli cdla el paraiso','soltero','vendedor');
 
 -- login 
-call crearLogin('Chrips97','123456',0929786366);
-call crearLogin('Gerie_24','Princesita78',1701514785);
-call crearLogin('bManza','Skywalker35',0914447852);
-call crearLogin('Wilfrio','Ginpa152',0920142356);
-call crearLogin('AleTex','Alexizz123',0954552102);
+call crearLogin('cp','cp',929786366);
+call crearLogin('gr','gr',1701514785);
+call crearLogin('bm','bm',914447852);
+call crearLogin('Wilfrio','Ginpa152',920142356);
+call crearLogin('AleTex','Alexizz123',954552102);
 
 -- tipo casa
 call crearTipoCasa('CAS001','2','Oasis');
@@ -272,9 +283,9 @@ call crearTipoCasa('CAS003','4','Cielo');
 
 
 -- cliente
-call crearcliente('CUS001',0929785214,2);
-call crearcliente('CUS002',0991224574,1);
-call crearcliente('CUS003',0981234561,0);
+call crearcliente('CUS001',929785214,2);
+call crearcliente('CUS002',991224574,1);
+call crearcliente('CUS003',981234561,0);
 
 
 

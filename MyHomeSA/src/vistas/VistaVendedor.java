@@ -14,7 +14,6 @@ import myhomesa.modelos.Vendedor;
  * @author Dark
  */
 public class VistaVendedor extends javax.swing.JFrame {
-    private Vendedor vendedor;
     CtrlVendedor ctrlVendedor;
     ArrayList<Cliente> clientes;
  
@@ -22,12 +21,18 @@ public class VistaVendedor extends javax.swing.JFrame {
         this.setTitle("Vendedor");
         initComponents();
         
-        this.clientes = new ArrayList<>();        
+        this.clientes = new ArrayList<>();     
+        
+        setDefaultCloseOperation(VistasAdministrador.DISPOSE_ON_CLOSE); 
     }
     
     public void setCtrlVendedor(CtrlVendedor ctrl){
         this.ctrlVendedor = ctrl;
     }
+    public CtrlVendedor getCtrlVendedor() {
+        return ctrlVendedor;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,6 +51,7 @@ public class VistaVendedor extends javax.swing.JFrame {
         jTextField10 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        btnSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +73,13 @@ public class VistaVendedor extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        btnSesion.setText("Cerar sesion");
+        btnSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSesionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -79,13 +92,17 @@ public class VistaVendedor extends javax.swing.JFrame {
                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))
-                .addGap(92, 328, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
+                .addComponent(btnSesion)
+                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel11)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(btnSesion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -102,7 +119,7 @@ public class VistaVendedor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(532, Short.MAX_VALUE)
+                .addContainerGap(558, Short.MAX_VALUE)
                 .addComponent(btnAcciones)
                 .addGap(109, 109, 109))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,6 +147,14 @@ public class VistaVendedor extends javax.swing.JFrame {
     private void btnAccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccionesActionPerformed
         System.out.println("Acciones vendedor");
     }//GEN-LAST:event_btnAccionesActionPerformed
+
+    private void btnSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSesionActionPerformed
+        this.setVisible(false);
+        this.dispose(); 
+        
+        Login login = new Login();
+        login.setVisible(true);        
+    }//GEN-LAST:event_btnSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,6 +193,7 @@ public class VistaVendedor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> Lista;
     private javax.swing.JButton btnAcciones;
+    private javax.swing.JButton btnSesion;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;

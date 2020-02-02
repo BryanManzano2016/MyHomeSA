@@ -18,55 +18,27 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnCliente = new javax.swing.JButton();
-        btnVendedor = new javax.swing.JButton();
-        btnAdministrador = new javax.swing.JButton();
         usuario = new javax.swing.JTextField();
         contrasena = new javax.swing.JTextField();
-        btnClienteInvitado = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 153));
 
-        btnCliente.setBackground(new java.awt.Color(0, 204, 204));
-        btnCliente.setForeground(new java.awt.Color(0, 153, 153));
-        btnCliente.setText("Cliente");
-        btnCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClienteActionPerformed(evt);
-            }
-        });
-
-        btnVendedor.setBackground(new java.awt.Color(0, 204, 204));
-        btnVendedor.setForeground(new java.awt.Color(0, 153, 153));
-        btnVendedor.setText("Vendedor");
-        btnVendedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVendedorActionPerformed(evt);
-            }
-        });
-
-        btnAdministrador.setBackground(new java.awt.Color(0, 204, 204));
-        btnAdministrador.setForeground(new java.awt.Color(0, 153, 153));
-        btnAdministrador.setText("Administrador");
-        btnAdministrador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdministradorActionPerformed(evt);
-            }
-        });
-
         usuario.setBackground(new java.awt.Color(204, 204, 204));
-        usuario.setText("usuario");
 
         contrasena.setBackground(new java.awt.Color(204, 204, 204));
-        contrasena.setText("contraseña");
 
-        btnClienteInvitado.setBackground(new java.awt.Color(0, 204, 204));
-        btnClienteInvitado.setForeground(new java.awt.Color(0, 153, 153));
-        btnClienteInvitado.setText("Invitado");
-        btnClienteInvitado.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setText("Usuario");
+
+        jLabel2.setText("Contraseña");
+
+        btnLogin.setText("Ingresar");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClienteInvitadoActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
 
@@ -77,55 +49,45 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnClienteInvitado, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                            .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                            .addComponent(btnVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                            .addComponent(btnAdministrador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(66, Short.MAX_VALUE))
+                            .addComponent(contrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                            .addComponent(usuario)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(btnLogin)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnAdministrador)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(btnCliente)
-                .addGap(26, 26, 26)
-                .addComponent(btnVendedor)
-                .addGap(28, 28, 28)
-                .addComponent(btnClienteInvitado)
-                .addGap(51, 51, 51)
+                .addContainerGap(106, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addComponent(btnLogin)
+                .addGap(56, 56, 56))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
-        ctrlMaster.validarCredenciales(this.usuario.getText());
-    }//GEN-LAST:event_btnClienteActionPerformed
-
-    private void btnClienteInvitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteInvitadoActionPerformed
-        ctrlMaster.llamarClienteInvitado();
-    }//GEN-LAST:event_btnClienteInvitadoActionPerformed
-
-    private void btnVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendedorActionPerformed
-        ctrlMaster.validarCredenciales(this.usuario.getText());
-    }//GEN-LAST:event_btnVendedorActionPerformed
-
-    private void btnAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministradorActionPerformed
-        ctrlMaster.validarCredenciales(this.usuario.getText());
-    }//GEN-LAST:event_btnAdministradorActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        if (!this.usuario.getText().equals("") && !this.contrasena.getText().equals("")) {
+            ctrlMaster.validarCredenciales(this.usuario.getText(), this.contrasena.getText());    
+            this.setVisible(false);
+            this.dispose();             
+        }        
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,11 +125,10 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdministrador;
-    private javax.swing.JButton btnCliente;
-    private javax.swing.JButton btnClienteInvitado;
-    private javax.swing.JButton btnVendedor;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JTextField contrasena;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
 }
