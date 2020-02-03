@@ -4,7 +4,7 @@ package controladores;
 import myhomesa.modelos.Usuario;
 import vistas.VistasAdministrador;
 import vistas.VistaCliente;
-import vistas.VistaVendedor;
+// import vistas.VistaVendedor;
  
 public class CtrlMaster {
     
@@ -42,10 +42,10 @@ public class CtrlMaster {
     
     public void llamarCtrlVendedor(Usuario usuario){
         this.ctrlVendedor = new CtrlVendedor(usuario);        
-        VistaVendedor vistaVendedor = new VistaVendedor();
-        vistaVendedor.setCtrlVendedor(this.ctrlVendedor);
+        //VistaVendedor vistaVendedor = new VistaVendedor();
+        //vistaVendedor.setCtrlVendedor(this.ctrlVendedor);
         
-        vistaVendedor.setVisible(true);
+       // vistaVendedor.setVisible(true);
     }
     public void llamarCtrlCliente(Usuario usuario){
         this.ctrlCliente = new CtrlCliente(usuario);

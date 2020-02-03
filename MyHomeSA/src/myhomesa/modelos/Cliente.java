@@ -209,7 +209,6 @@ public final class Cliente extends Usuario{
         }         
     }
     
-    @Override
     public String toString() {
         return "Cliente{" + "idCliente=" + idCliente + ", telefonoTrabajo=" + telefonoTrabajo + ", nroHijos=" + nroHijos + '}';
     }

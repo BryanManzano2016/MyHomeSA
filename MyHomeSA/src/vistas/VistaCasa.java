@@ -126,9 +126,10 @@ public class VistaCasa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        /*
         System.out.println((String) jComboBox1.getSelectedItem());
         System.out.println(jTextField1.getText());
-        LinkedList<LinkedList<String>> datos = vendedor.consultarCasa((String) jComboBox1.getSelectedItem(), jTextField1.getText());
+        // LinkedList<LinkedList<String>> datos = vendedor.consultarCasa((String) jComboBox1.getSelectedItem(), jTextField1.getText());
         if (datos.size() != 0) {
             DefaultTableModel model1 = new DefaultTableModel(null, new String[]{"Nombre", "Categoria", "Precio", "Marca"});
             for (int i = 0; i < datos.size(); i++) {
@@ -144,6 +145,7 @@ public class VistaCasa extends javax.swing.JFrame {
                 }
             ));
         }
+        */
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
