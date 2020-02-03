@@ -3,7 +3,6 @@ package myhomesa.modelos;
  
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 public final class Cliente extends Usuario{
     
@@ -19,12 +18,16 @@ public final class Cliente extends Usuario{
         super(usuario.getNombres(), usuario.getApellidos(), usuario.getCedula(),
                 usuario.getTelefono(), usuario.getCorreoElectronico(), usuario.getDireccionDomicilio(),
                 usuario.getEstadoCivil(), usuario.getCargoTrabajo(), usuario.getUsuario(), 
-                usuario.getPassword());        
+                usuario.getPassword());                        
+        cargarDatos();
+    }
+    
+    public void cargarDatos(){
         casas = new ArrayList<>();
         
         cargarDatosCliente();
-        buscarCasaUsuario();        
-    }
+        buscarCasaUsuario();            
+    }     
 
     public String getIdCliente() {
         return idCliente;
@@ -58,6 +61,12 @@ public final class Cliente extends Usuario{
         this.estaRegistrado = estaRegistrado;
     }
 
+    
+    /*
+        ESTOS METODOS TAMBIEN DEBERIA HACERLOS VENDEDOR
+    */
+    
+    
     public ArrayList<Casa> getCasas() {
         return casas;
     }
@@ -87,6 +96,7 @@ public final class Cliente extends Usuario{
             System.out.println(e.getCause());
         } 
     }      
+    
     
     public void buscarCasaUsuario(){
         try{ 
@@ -164,7 +174,7 @@ public final class Cliente extends Usuario{
         }         
     }    
     
-     public ArrayList<ElementoCasa> buscarCasaElementos(){
+    public ArrayList<ElementoCasa> buscarCasaElementos(){
         try{ 
             ArrayList<ElementoCasa> elementos = new ArrayList<>();
             conexion.iniciar_conexion();
@@ -188,8 +198,8 @@ public final class Cliente extends Usuario{
             System.out.println(e.getCause());
         }         
         return null;
-    }   
-    
+    }                
+     
     public void agregarElementoCasa(String idElemento, int idRelacion){
         try{ 
             conexion.iniciar_conexion();
@@ -209,6 +219,72 @@ public final class Cliente extends Usuario{
         }         
     }
     
+    public ArrayList<Casa> buscarCasasBasicas(){
+        try{ 
+            ArrayList<Casa> casasEnvio = new ArrayList<>();
+            conexion.iniciar_conexion();
+            conexion.setProcedimiento( conexion.getConexion().
+                            prepareCall( "call buscarCasaBasica()")
+            );
+            conexion.setResultado( conexion.getProcedimiento().executeQuery() );
+            while ( conexion.getResultado().next() ) {
+                
+                System.out.println(conexion.getResultado().getFloat("costoBase"));
+                
+                switch (conexion.getResultado().getString("nombreCasa")) {
+                    case "Oasis":
+                        casasEnvio.add(
+                            new CasaOasis(conexion.getResultado().getString("idCasa"),
+                                    conexion.getResultado().getFloat("costoBase"), 
+                                conexion.getResultado().getString("nombreCasa")));
+                        break;
+                    case "Paraiso":
+                        casasEnvio.add(new CasaParaiso(conexion.getResultado().getString("idCasa"),
+                                    conexion.getResultado().getFloat("costoBase"), 
+                                conexion.getResultado().getString("nombreCasa")));      
+                        break;
+                    case "Cielo":
+                        casasEnvio.add(new CasaCielo(conexion.getResultado().getString("idCasa"),
+                                    conexion.getResultado().getFloat("costoBase"), 
+                                conexion.getResultado().getString("nombreCasa")));             
+                        break;
+                    default:
+                        break;
+                }                 
+            } 
+            conexion.anular_puentes();
+            
+            return casasEnvio;
+        } catch( SQLException e ){
+            System.out.println( e.getSQLState() );
+            System.out.println(e.getCause());
+        }         
+        return null;
+    }      
+     
+    public void agregarCasaBasica(int cedula, String idCasa){
+        try{ 
+            conexion.iniciar_conexion();
+            conexion.setProcedimiento( conexion.getConexion().
+                            prepareCall( "call seleccionarCasaBasica(?, ?)")
+            );
+            // ec.idElemento, ec.precio, ec.nombre
+            conexion.getProcedimiento().setInt(1, cedula );
+            conexion.getProcedimiento().setString(2, idCasa );
+            
+            conexion.getProcedimiento().executeQuery();
+            
+            conexion.anular_puentes();
+        } catch( SQLException e ){
+            System.out.println( e.getSQLState() );
+            System.out.println(e.getCause());
+        }         
+    }
+     
+    
+    
+    
+    @Override
     public String toString() {
         return "Cliente{" + "idCliente=" + idCliente + ", telefonoTrabajo=" + telefonoTrabajo + ", nroHijos=" + nroHijos + '}';
     }

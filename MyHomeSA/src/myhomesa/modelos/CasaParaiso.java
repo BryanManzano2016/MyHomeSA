@@ -17,4 +17,7 @@ public class CasaParaiso extends Casa{
         super(id, metrosCuadrados, nroPlantas, esEsquinera, orientacion, tamanoPatio,
                 numeroHabitaciones, costoBase, idRelacion, nombreCasa);
     } 
+    public CasaParaiso(String id, float costoBase, String nombreCasa) {
+        super(id, costoBase, nombreCasa);
+    }    
 }

@@ -131,13 +131,6 @@ public class Vendedor extends Usuario {
             System.out.println(e.getCause());
         }         
     }
-
-    public ArrayList<Casa> getCasas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setCasas(ArrayList<Casa> casas) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+ 
     
 }

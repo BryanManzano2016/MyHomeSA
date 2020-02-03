@@ -159,10 +159,21 @@ create procedure buscarCliente( in cedula int )
 begin 
 	select * from  cliente cl where cl.cedula = cedula;
 end $$
-
+/*
 create procedure buscarCasa( in spidcasa varchar(20))
 begin 
 	select * from casa where idcasa = spidcasa;
+end $$
+*/
+create procedure buscarCasaBasica()
+begin 
+	select idCasa, costoBase, nombreCasa from casa;
+end $$
+
+create procedure seleccionarCasaBasica(in cedula int, in idCasa varchar(20))
+begin 
+	insert into casaRelacionUsuario values
+		(default, idCasa, cedula);
 end $$
 
 create procedure buscarelementoscasa()

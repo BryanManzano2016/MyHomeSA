@@ -20,7 +20,7 @@ public class Conexion {
     private final String host = "localhost";
     private final String puerto = "3306";
     private final String usuarioDB = "root";
-    private final String passDB = "1234";
+    private final String passDB = "mysql";
 
     public Conexion() {
         conexion = null; 

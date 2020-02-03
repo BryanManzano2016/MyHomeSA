@@ -10,11 +10,7 @@ import java.util.ArrayList;
 import javax.swing.event.ListSelectionEvent;
 
 import myhomesa.modelos.ElementoCasa;
-
-/**
- *
- * @author Dark
- */
+ 
 public class AgregarElementoCasa extends javax.swing.JFrame {
 
     private String idElemento = "";

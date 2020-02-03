@@ -35,6 +35,12 @@ public class Casa{
         this.elementosExtra = new ArrayList<>();
     }
 
+    public Casa(String id, float costoBase, String nombreCasa) {
+        this.id = id;
+        this.costoBase = costoBase;
+        this.nombreCasa = nombreCasa;
+    }
+
     public String getId() {
         return id;
     }

@@ -17,6 +17,9 @@ public class CasaOasis extends Casa{
         super(id, metrosCuadrados, nroPlantas, esEsquinera, orientacion, tamanoPatio,
                 numeroHabitaciones, costoBase, idRelacion, nombreCasa);
     }
- 
+
+    public CasaOasis(String id, float costoBase, String nombreCasa) {
+        super(id, costoBase, nombreCasa);
+    }
     
 }

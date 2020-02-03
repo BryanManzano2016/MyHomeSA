@@ -17,4 +17,7 @@ public class CasaCielo extends Casa{
         super(id, metrosCuadrados, nroPlantas, esEsquinera, orientacion, tamanoPatio,
                 numeroHabitaciones, costoBase, idRelacion, nombreCasa);
     } 
+    public CasaCielo(String id, float costoBase, String nombreCasa) {
+        super(id, costoBase, nombreCasa);
+    }    
 }
