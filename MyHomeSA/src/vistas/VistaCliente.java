@@ -38,11 +38,6 @@ public class VistaCliente extends javax.swing.JFrame {
                     tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
             this.idCasa = tabla.getValueAt(tabla.getSelectedRow(), 1).toString();          
         });           
-
-        /*
-        this.ctrlCliente.getCliente().cargarDatosCliente();
-        this.ctrlCliente.getCliente().buscarCasaUsuario();
-        */
     }
  
     /**
@@ -56,7 +51,7 @@ public class VistaCliente extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnSesion = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btonAgregarElemento = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         btnInformacion = new javax.swing.JButton();
@@ -74,10 +69,10 @@ public class VistaCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("+ Añadir elemento");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btonAgregarElemento.setText("+ Añadir elemento");
+        btonAgregarElemento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btonAgregarElementoActionPerformed(evt);
             }
         });
 
@@ -170,17 +165,17 @@ public class VistaCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSesion)))
+                        .addComponent(btnSesion))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btonAgregarElemento)
+                                .addGap(369, 369, 369)
+                                .addComponent(btnInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(240, 240, 240))
         );
         jPanel1Layout.setVerticalGroup(
@@ -194,7 +189,7 @@ public class VistaCliente extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btonAgregarElemento)
                     .addComponent(btnInformacion))
                 .addGap(22, 22, 22))
         );
@@ -229,12 +224,16 @@ public class VistaCliente extends javax.swing.JFrame {
                             "Warning",
                             JOptionPane.WARNING_MESSAGE);
         });
-    
     }//GEN-LAST:event_btnInformacionActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btonAgregarElementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonAgregarElementoActionPerformed
+        AgregarElementoCasa vistaAgregarElemento = new AgregarElementoCasa();
+        vistaAgregarElemento.setCtrl(ctrlCliente);
+        vistaAgregarElemento.setIdRelacion(idRelacion);
+        vistaAgregarElemento.cargarElementos();
+        
+        vistaAgregarElemento.setVisible(true);
+    }//GEN-LAST:event_btonAgregarElementoActionPerformed
 
     private void btnSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSesionActionPerformed
         this.setVisible(false);
@@ -286,7 +285,7 @@ public class VistaCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInformacion;
     private javax.swing.JButton btnSesion;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btonAgregarElemento;
     private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

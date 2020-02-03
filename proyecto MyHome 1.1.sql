@@ -165,9 +165,9 @@ begin
 	select * from casa where idcasa = spidcasa;
 end $$
 
-create procedure buscarelementoscasa( in spidelemento varchar(20))
+create procedure buscarelementoscasa()
 begin 
-	select * from elementoscasa where idelementocasa = spidelemento;
+	select * from elementoscasa;
 end $$
 
 
@@ -239,6 +239,14 @@ begin
     where cre.idCasaRelacionUsuario = cru.idRelacion and cre.idElemento = ec.idElemento
     and cru.idRelacion = idRelacion;   
 end $$;
+
+
+create procedure agregarElementoCasa( in idElemento varchar(20), in idRelacion int)
+begin 
+	insert into casarelacionelemento values(default, idElemento, idRelacion);
+end $$;
+
+
   
 call crearUsuario(929786366,'Christian','Portilla',0929785214,'poplays26@gmail.com','Via samborondon cdla las riberas','soltero','vendedor');
 call crearUsuario(1701514785,'Genesis','Riera',0991224574,'genesisrie_24@gmail.com','la alborada etapa 11va','soltero','cliente');

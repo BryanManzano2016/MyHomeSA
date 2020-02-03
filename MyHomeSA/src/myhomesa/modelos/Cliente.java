@@ -3,6 +3,7 @@ package myhomesa.modelos;
  
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public final class Cliente extends Usuario{
     
@@ -142,15 +143,19 @@ public final class Cliente extends Usuario{
             // ec.idElemento, ec.precio, ec.nombre
             conexion.getProcedimiento().setInt(1, idRelacion );
             conexion.setResultado( conexion.getProcedimiento().executeQuery() );
+            this.casas.stream().filter((casa) -> (casa.getIdRelacion() ==
+                    idRelacion)).forEachOrdered((casa) -> {
+                casa.elementosExtra.clear();
+            });              
             while ( conexion.getResultado().next() ) {
-                for (Casa casa : casas) {
-                    casa.agregarElementoCasa(
+                ElementoCasa elemento = 
                         new ElementoCasa(conexion.getResultado().getString("idElemento"),                                
-                        conexion.getResultado().getString("nombre"),
-                        conexion.getResultado().getFloat("precio"))
-                    );
-                }
-                
+                conexion.getResultado().getString("nombre"),
+                conexion.getResultado().getFloat("precio"));   
+                this.casas.stream().filter((casa) -> (casa.getIdRelacion() ==
+                        idRelacion)).forEachOrdered((casa) -> {
+                    casa.elementosExtra.add(elemento);
+                });                 
             } 
             conexion.anular_puentes();
         } catch( SQLException e ){
@@ -158,6 +163,51 @@ public final class Cliente extends Usuario{
             System.out.println(e.getCause());
         }         
     }    
+    
+     public ArrayList<ElementoCasa> buscarCasaElementos(){
+        try{ 
+            ArrayList<ElementoCasa> elementos = new ArrayList<>();
+            conexion.iniciar_conexion();
+            conexion.setProcedimiento( conexion.getConexion().
+                            prepareCall( "call buscarelementoscasa()")
+            );
+            // ec.idElemento, ec.precio, ec.nombre
+            conexion.setResultado( conexion.getProcedimiento().executeQuery() );
+            while ( conexion.getResultado().next() ) {
+                elementos.add(
+                    new ElementoCasa(conexion.getResultado().getString("idElemento"),                                
+                    conexion.getResultado().getString("nombre"),
+                    conexion.getResultado().getFloat("precio"))
+                );
+            } 
+            conexion.anular_puentes();
+            
+            return elementos;
+        } catch( SQLException e ){
+            System.out.println( e.getSQLState() );
+            System.out.println(e.getCause());
+        }         
+        return null;
+    }   
+    
+    public void agregarElementoCasa(String idElemento, int idRelacion){
+        try{ 
+            conexion.iniciar_conexion();
+            conexion.setProcedimiento( conexion.getConexion().
+                            prepareCall( "call agregarElementoCasa(?, ?)")
+            );
+            // ec.idElemento, ec.precio, ec.nombre
+            conexion.getProcedimiento().setString(1, idElemento );
+            conexion.getProcedimiento().setInt(2, idRelacion );
+            
+            conexion.getProcedimiento().executeQuery();
+            
+            conexion.anular_puentes();
+        } catch( SQLException e ){
+            System.out.println( e.getSQLState() );
+            System.out.println(e.getCause());
+        }         
+    }
     
     @Override
     public String toString() {
