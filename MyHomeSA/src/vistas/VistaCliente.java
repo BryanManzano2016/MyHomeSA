@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import myhomesa.modelos.Casa;
+import myhomesa.modelos.ElementoCasa;
 
 public class VistaCliente extends javax.swing.JFrame {
     
@@ -219,8 +220,11 @@ public class VistaCliente extends javax.swing.JFrame {
         this.ctrlCliente.getCliente().getCasas().stream().filter((casa) -> 
                 (casa.getId().equals(this.idCasa) && 
                         casa.getIdRelacion() == this.idRelacion)).forEachOrdered((casa) -> {
+                    float total = casa.getCostoBase();
+                    total = casa.getElementosExtra().stream().map((elem) -> elem.getPrecio()).reduce(total, (accumulator, _item) -> accumulator + _item);
                     JOptionPane.showMessageDialog(this,
-                            casa.toString() + "\n" + casa.getElementosExtra().toString(),
+                            casa.toString() + "\n" + casa.getElementosExtra().toString()+
+                                    "\nCon un precio total de $" + total,
                             "Warning",
                             JOptionPane.WARNING_MESSAGE);
         });

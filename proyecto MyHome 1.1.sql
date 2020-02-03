@@ -2,61 +2,64 @@ drop database if exists MyHomeMaRiPo;
 Create database MyHomeMaRiPo;
 use MyHomeMaRiPo;
 
-create table Usuario(
-	cedula int primary key,
-	nombre varchar(50) not null,
-	apellido varchar(50) not null,
-	telefono int not null,
-	correoElectronico varchar(50) not null,
-	direccionAdomicilio varchar(100) not null,
-	estadoCivil varchar(20) not null,
-	rol varchar(20) not null
+CREATE TABLE Usuario (
+    cedula INT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    telefono INT NOT NULL,
+    correoElectronico VARCHAR(50) NOT NULL,
+    direccionAdomicilio VARCHAR(100) NOT NULL,
+    estadoCivil VARCHAR(20) NOT NULL,
+    rol VARCHAR(20) NOT NULL
 );
 
-create table login(
-	usuario varchar(50) primary key,
-	contraseña varchar(50) not null,
-	cedula int not null,
-	foreign key (cedula) references Usuario (cedula)
+CREATE TABLE login (
+    usuario VARCHAR(50) PRIMARY KEY,
+    contraseña VARCHAR(50) NOT NULL,
+    cedula INT NOT NULL,
+    FOREIGN KEY (cedula)
+        REFERENCES Usuario (cedula)
 );
 
-create table Cliente(
-	idCliente varchar(10) primary key,
-	telefono int not null,
-	numHijos int not null,
-    cedula int not null,
-    foreign key (cedula) references Usuario (cedula)
+CREATE TABLE Cliente (
+    idCliente VARCHAR(10) PRIMARY KEY,
+    telefono INT NOT NULL,
+    numHijos INT NOT NULL,
+    cedula INT NOT NULL,
+    FOREIGN KEY (cedula)
+        REFERENCES Usuario (cedula)
 );
  
-create table casa(
-	idCasa varchar(20) primary key,
-	metrosCuadrados float not null,
-	nroPlantas int not null,
-	esEsquinera boolean not null, 
-	orientacion varchar(40) not null,
-	tamañoPatio float not null,
-	costoBase float not null, 
-    numHabitacion int not null,
-    nombreCasa varchar(50) not null
+CREATE TABLE casa (
+    idCasa VARCHAR(20) PRIMARY KEY,
+    metrosCuadrados FLOAT NOT NULL,
+    nroPlantas INT NOT NULL,
+    esEsquinera BOOLEAN NOT NULL,
+    orientacion VARCHAR(40) NOT NULL,
+    tamañoPatio FLOAT NOT NULL,
+    costoBase FLOAT NOT NULL,
+    numHabitacion INT NOT NULL,
+    nombreCasa VARCHAR(50) NOT NULL
 );
 
-create table elementosCasa(
-	idElemento varchar(20) primary key,
-	precio float not null,
-	nombre varchar(30) not null
+CREATE TABLE elementosCasa (
+    idElemento VARCHAR(20) PRIMARY KEY,
+    precio FLOAT NOT NULL,
+    nombre VARCHAR(30) NOT NULL
 );
  
-create table casaRelacionUsuario(
-	idRelacion int AUTO_INCREMENT PRIMARY KEY,	
-	idCasa varchar(20),
-    cedula int
-); 
+CREATE TABLE casaRelacionUsuario (
+    idRelacion INT AUTO_INCREMENT PRIMARY KEY,
+    idCasa VARCHAR(20),
+    cedula INT
+);
 
-create table casaRelacionElemento(
-	idRelacion int AUTO_INCREMENT PRIMARY KEY,
-    idElemento varchar(20),
-    idCasaRelacionUsuario int,
-    foreign key (idCasaRelacionUsuario) references casaRelacionUsuario (idRelacion)
+CREATE TABLE casaRelacionElemento (
+    idRelacion INT AUTO_INCREMENT PRIMARY KEY,
+    idElemento VARCHAR(20),
+    idCasaRelacionUsuario INT,
+    FOREIGN KEY (idCasaRelacionUsuario)
+        REFERENCES casaRelacionUsuario (idRelacion)
 );
  
 -- procedures para crear nuevo elementos...
@@ -140,8 +143,9 @@ end $$
 -- procedures para buscar de acuerdo al pk de la entidad
 create procedure buscarUsuario(in spcedula int)
 begin 
-	select * from usuario where cedula=  spcedula;
+	select * from usuario where cedula = spcedula;
 end $$
+
 
 create procedure buscarlogin( in spusuario varchar(50), in spuContrasena varchar(50) )
 begin  
@@ -155,10 +159,13 @@ begin
 	select * from usuario us where us.cedula = cedulaVar;
 end $$
 
-create procedure buscarCliente( in cedula int )
+create procedure buscarClientes()
 begin 
-	select * from  cliente cl where cl.cedula = cedula;
+	select * from cliente cl, usuario us where cl.cedula = us.cedula;
 end $$
+
+
+
 /*
 create procedure buscarCasa( in spidcasa varchar(20))
 begin 
@@ -236,7 +243,7 @@ begin
 end $$
 delimiter $$;
     
-create procedure buscarCasaUsuario( in cedula int)
+create procedure buscarCasaUsuario(in cedula int)
 begin 
 	select *
     from casa cs, casaRelacionUsuario cru
@@ -311,64 +318,4 @@ insert into casaRelacionElemento values
     (default , 'ELE004', 2),
     (default , 'ELE005', 1),
     (default , 'ELE001', 3);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 

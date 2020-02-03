@@ -21,6 +21,12 @@ public final class Cliente extends Usuario{
                 usuario.getPassword());                        
         cargarDatos();
     }
+
+    public Cliente(String nombres, String apellidos, String cedula, String telefono, 
+            String correoElectronico, String direccionDomicilio, String estadoCivil) {
+        super(nombres, apellidos, cedula, telefono, correoElectronico, direccionDomicilio, estadoCivil);
+        cargarDatos();
+    }
     
     public void cargarDatos(){
         casas = new ArrayList<>();

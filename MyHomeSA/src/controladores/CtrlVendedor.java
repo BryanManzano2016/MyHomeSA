@@ -10,4 +10,14 @@ public class CtrlVendedor {
     public CtrlVendedor(Usuario usuario) {
         this.vendedor = new Vendedor(usuario);
     }    
+
+    public Vendedor getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
+    }
+    
+    
 }

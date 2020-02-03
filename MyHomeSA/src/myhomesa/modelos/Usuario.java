@@ -37,6 +37,19 @@ public class Usuario {
         conexion = new Conexion();
     }
     
+    public Usuario(String nombres, String apellidos, String cedula, String telefono,
+            String correoElectronico, String direccionDomicilio, String estadoCivil) {
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.cedula = cedula;
+        this.telefono = telefono;
+        this.correoElectronico = correoElectronico;
+        this.direccionDomicilio = direccionDomicilio;
+        this.estadoCivil = estadoCivil;
+        
+        conexion = null;
+    }    
+    
     public Usuario() {
         conexion = new Conexion();
     }
